@@ -1,0 +1,35 @@
+class ApiController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
+  def invalid_request
+     render :json => {:message => 'The request is not valid'}, :status => 422
+  end
+
+  def resource_class
+    User
+  end
+
+  def require_api_authentication
+    return invalid_request if request.env['HTTP_AUTHENTICATION_TOKEN'].blank?
+    @user = resource_class.where("authentication_token  = ?",  request.env['HTTP_AUTHENTICATION_TOKEN'] ).first
+    return invalid_request if @user.blank?
+    return time_out_message if timed_out
+    return @user
+  end
+
+  def current_user
+    @user
+  end
+
+  def timed_out
+    (current_user.current_sign_in_at.utc + time_out) <= Time.now.utc
+  end
+
+  def time_out
+    2.minutes
+  end
+
+  def time_out_message
+    render :json => {:message => "You have beeen timed out. In order to access api, please login again"}
+  end
+end
