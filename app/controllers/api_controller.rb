@@ -12,7 +12,7 @@ class ApiController < ApplicationController
   def require_api_authentication
     return invalid_request if request.env['HTTP_AUTHENTICATION_TOKEN'].blank?
     @user = resource_class.where("authentication_token  = ?",  request.env['HTTP_AUTHENTICATION_TOKEN'] ).first
-    return invalid_request if @user.blank?
+    return invalid_request  if @user.blank?
     return time_out_message if timed_out
     return @user
   end
@@ -29,7 +29,11 @@ class ApiController < ApplicationController
     2.minutes
   end
 
+  def logged_in?
+    !current_user.session_id.blank?
+  end
+
   def time_out_message
-    render :json => {:message => "You have beeen timed out. In order to access api, please login again"}
+    render :json => {:message => "You can not access this action. In order to access api, please login again"}
   end
 end

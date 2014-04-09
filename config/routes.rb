@@ -15,7 +15,7 @@ RailsApiDemo::Application.routes.draw do
          end
        end
        resources :tasks
-       match '/sign_in' => 'sessions#destroy',  :via => :create
+       match '/sign_in' => 'sessions#create',   :via => :post
        match '/sign_out' => 'sessions#destroy', :via => :delete
     end
   end

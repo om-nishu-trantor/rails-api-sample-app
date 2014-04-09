@@ -1,5 +1,4 @@
 class Api::V1::TasksController < ApiController
-  include ActionController::MimeResponds
 
   before_filter :require_api_authentication
 
@@ -7,12 +6,12 @@ class Api::V1::TasksController < ApiController
 
   end
 
+  #
+  # /api/v1/tasks.json
+  #
   def index
     @tasks = Task.all
-    respond_to do |format|
-      format.json { render json: @tasks }
-      format.xml { render xml: @tasks }
-    end
+    render json: @tasks
   end
 
   def show
