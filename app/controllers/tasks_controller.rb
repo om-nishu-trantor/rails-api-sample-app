@@ -3,6 +3,10 @@ class TasksController < ApplicationController
   # GET /tasks.json
 
 
+  ##
+  # This controller is created via scaffold just for testing purpose from the view -  home#index
+  ##
+
   def index
     @tasks = Task.all
     render json: @tasks

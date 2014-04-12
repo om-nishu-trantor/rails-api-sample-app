@@ -18,8 +18,11 @@ class User < ActiveRecord::Base
 
   def ensure_authentication_token
     loop do
-      token = Devise.friendly_token
-      break token unless User.where(authentication_token: token).first
+      token  = Devise.friendly_token
+      unless User.where(authentication_token: token).first
+        self.authentication_token = token
+        break token
+      end
     end
   end
 

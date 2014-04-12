@@ -1,6 +1,8 @@
 class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
+  # rescue_from ActionController::RoutingError, :with => :render_not_found
+
   def invalid_request
      render :json => {:message => 'The request is not valid'}, :status => 422
   end
@@ -26,7 +28,7 @@ class ApiController < ApplicationController
   end
 
   def time_out
-    2.minutes
+    5.minutes
   end
 
   def logged_in?
@@ -36,4 +38,6 @@ class ApiController < ApplicationController
   def time_out_message
     render :json => {:message => "You can not access this action. In order to access api, please login again"}
   end
+
+
 end
