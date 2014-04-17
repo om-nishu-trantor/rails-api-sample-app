@@ -10,13 +10,10 @@ toDoList.controller('ToDoListCtrl', function ($scope, $http) {
 //    });
 
     $scope.submit = function () {
-        debugger
         if ($scope.text) {
-
             $http.post('/tasks.json').success(function (data) {
                 $scope.todos.push({name:})
             });
-
             $scope.todos.push({name: this.text});
             $scope.text = '';
         }
