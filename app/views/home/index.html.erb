@@ -5,33 +5,13 @@
 <div id="container" ng-controller="ToDoListCtrl">
   <h1>To-Do List</h1>
 
-  <form id="new_task">
-    <input type="text" name="task[name]" id="task_name">
+  <form id="new_task" ng-submit="submit()">
+    <input type="text"  ng-model="text" name="task[name]" id="task_name">
     <input type="submit" value="Add">
   </form>
   <ul id="tasks">
     <li ng-repeat="todo in todos">
-      {{todo.id}}
       <p>{{todo.name}}</p>
     </li>
   </ul>
 </div>
-
-
-
-
-
-<ul>
-  <li>
-    <span>Nexus S</span>
-    <p>
-      Fast just got faster with Nexus S.
-    </p>
-  </li>
-  <li>
-    <span>Motorola XOOM™ with Wi-Fi</span>
-    <p>
-      The Next, Next Generation tablet.
-    </p>
-  </li>
-</ul>

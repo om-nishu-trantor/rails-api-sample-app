@@ -38,11 +38,13 @@ end
 gem 'rails-api', :git => 'git@github.com:rails-api/rails-api.git'
 
 gem "devise", ">= 2.2.3"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'unicorn-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
